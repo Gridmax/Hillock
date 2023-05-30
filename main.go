@@ -40,6 +40,8 @@ func handleConnection(conn net.Conn) {
 	for {
 		// Read data from the connection
 		buffer := make([]byte, 1024)
+    addr := conn.RemoteAddr().(*net.TCPAddr)
+    fmt.Println(addr.IP.String())
 		n, err := conn.Read(buffer)
 		if err != nil {
 			fmt.Println("Failed to read data:", err)
@@ -48,7 +50,7 @@ func handleConnection(conn net.Conn) {
 
 		// Print the received data
     fmt.Println(buffer[:n])
-		fmt.Println("Received:", string(buffer[:n]))
+		fmt.Println("", string(buffer[:n]))
 	}
 }
 

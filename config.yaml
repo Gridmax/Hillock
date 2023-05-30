@@ -1,0 +1,5 @@
+database: mongo
+db_url:
+db_user:
+db_pw:
+db_name:
