@@ -17,5 +17,6 @@ func InsertData(data string) {
     panic(err)
   }
   fmt.Println(client)
+  fmt.Println(client)
 }
 
