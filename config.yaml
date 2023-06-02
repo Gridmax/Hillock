@@ -1,5 +1,7 @@
-database: mongo
-db_url:
+server_port: 6849
+database: 
+db_url: localhost:27017
 db_user:
 db_pw:
-db_name:
+db_name: gridmax
+db_table: agent_messages
