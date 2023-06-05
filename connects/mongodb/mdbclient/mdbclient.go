@@ -1,7 +1,6 @@
 package mdbclient
 
 import (
-  "fmt"
   "log"
   "time"
 
@@ -10,6 +9,8 @@ import (
   "go.mongodb.org/mongo-driver/mongo"
   "go.mongodb.org/mongo-driver/mongo/options"
   "go.mongodb.org/mongo-driver/bson"
+  
+  "github.com/Gridmax/Hillock/utility/configload"
 
   //"go.mongodb.org/mongo-driver/mongo/readpref"
 )
@@ -17,10 +18,10 @@ import (
 
 func InsertData(data string) {
 
-  jsonData, kv, err := messages.ConvertToJSONAndKeyValue(data)
-  fmt.Println(jsonData)
-  fmt.Println(kv["uptime"])
-  client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017"))
+  config, err := configload.LoadConfig("config.yaml")
+  
+  _, kv, err := messages.ConvertToJSONAndKeyValue(data)
+  client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://"+config.DatabaseUrl))
   if err != nil {
 
     panic(err)
@@ -49,8 +50,7 @@ func InsertData(data string) {
     {Key: "uptime", Value: kv["uptime"]},
   }) 
 
-  fmt.Println(client)
-  fmt.Println("Insert", sentinelInsert)
+  log.Println("MongoDB object successfully Inserted ", sentinelInsert)
   //fmt.Println(data)
 
 }

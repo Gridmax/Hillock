@@ -8,7 +8,7 @@ import (
 func DataFlow(dflow string, message string){
   if dflow == "mongodb"{
     log.Println("Messages have submitted to data flow for", dflow)
-    log.Println(message)
+    //log.Println(message)
     mdbclient.InsertData(message)
   }else if dflow == "mysql"{
   }else if dflow == "queue"{

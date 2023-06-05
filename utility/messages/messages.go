@@ -51,8 +51,6 @@ func ConvertToJSONAndKeyValue(message string) (string, map[string]string, error)
 	}
 
 	jsonStr := string(jsonBytes)
-  jsonStrs := strings.ReplaceAll(jsonStr, "\u0000\u000e\u0000\ufffdheader", "header")
-  fmt.Println("Debug", jsonStrs)
   return jsonStr, keyValue, nil
 }
 
