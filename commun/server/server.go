@@ -7,6 +7,7 @@ import (
   "log"
 
   "github.com/Gridmax/Hillock/utility/configload"
+  "github.com/Gridmax/Hillock/commun/dcontroller"
 //  "github.com/Gridmax/Hillock/utility/messages"
 )
 
@@ -44,11 +45,11 @@ func Start(configFile string) {
 		}
 
 		// Handle each connection in a separate goroutine
-	 	go handleConnection(conn)
+	 	go handleConnection(conn, config.DatabaseType)
 	}
 }
 
-func handleConnection(conn net.Conn) {
+func handleConnection(conn net.Conn, dflow string) {
 	defer conn.Close()
 
 	// Read data from the client
@@ -72,7 +73,11 @@ func handleConnection(conn net.Conn) {
     addr := conn.RemoteAddr().(*net.TCPAddr)
     log.Println("Data received from", addr, ":", data )
 		// fmt.Println("Received data:", string(data))
-    
+    if dflow != "" {
+      dcontroller.DataFlow(dflow, string(data))
+    }
+
+
     // For debugging on Message convertion
     //str, val, err := messages.ConvertToJSONAndKeyValue(string(buffer[:n])) 
     //fmt.Println(str, val, err)

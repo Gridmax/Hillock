@@ -1,5 +1,5 @@
 server_port: 6849
-database: 
+database: mongodb 
 db_url: localhost:27017
 db_user:
 db_pw:

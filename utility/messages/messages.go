@@ -24,8 +24,12 @@ func trimLastChar(s string) string {
 
 
 func ConvertToJSONAndKeyValue(message string) (string, map[string]string, error) {
+  //fmt.Println("ok", message)
 	message = trimLastChar(message)
+ // fmt.Println("2 ok", message)
+  message = strings.ReplaceAll(message, " ","")
   parts := strings.Split(message, ":")
+
 	if len(parts)%2 != 0 {
 		return "", nil, fmt.Errorf("invalid message format")
 	}
@@ -47,6 +51,8 @@ func ConvertToJSONAndKeyValue(message string) (string, map[string]string, error)
 	}
 
 	jsonStr := string(jsonBytes)
+  jsonStrs := strings.ReplaceAll(jsonStr, "\u0000\u000e\u0000\ufffdheader", "header")
+  fmt.Println("Debug", jsonStrs)
   return jsonStr, keyValue, nil
 }
 
