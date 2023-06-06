@@ -3,7 +3,6 @@ package mdbclient
 import (
   "log"
   "time"
-
   "context"
   "github.com/Gridmax/Hillock/utility/messages"
   "go.mongodb.org/mongo-driver/mongo"

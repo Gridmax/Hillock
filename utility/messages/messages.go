@@ -2,6 +2,7 @@ package messages
 
 import (
   "fmt"
+  "strconv"
 
   "strings"
   "unicode/utf8"
@@ -23,7 +24,7 @@ func trimLastChar(s string) string {
 }
 
 
-func ConvertToJSONAndKeyValue(message string) (string, map[string]string, error) {
+func ConvertToJSONAndKeyValue(message string) (string, map[string]int, error) {
   //fmt.Println("ok", message)
 	message = trimLastChar(message)
  // fmt.Println("2 ok", message)
@@ -35,14 +36,17 @@ func ConvertToJSONAndKeyValue(message string) (string, map[string]string, error)
 	}
 
 	jsonData := make(map[string]interface{})
-	keyValue := make(map[string]string)
+	keyValue := make(map[string]int)
 
 	for i := 0; i < len(parts); i += 2 {
 		key := parts[i]
 		value := parts[i+1]
 
-		jsonData[key] = value
-		keyValue[key] = value
+    values, _ := strconv.Atoi(value)
+
+		jsonData[key] = values
+		keyValue[key] = values
+
 	}
 
 	jsonBytes, err := json.Marshal(jsonData)
